@@ -37,7 +37,6 @@ public class UserCrudTest
 		requestParams.put("name",  "francisco");
 		requestParams.put("age",  18);
 		requestParams.put("status",  "OK");
-		requestParams.put("creationDate", String.valueOf(new java.sql.Date(Calendar.getInstance().getTime().getTime())));
 
 		final RequestSpecification request = RestAssured.given();
 		request.header("Content-Type", "application/json");

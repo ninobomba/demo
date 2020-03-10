@@ -1,7 +1,5 @@
 package com.demo.bootstrap;
 
-import java.util.Calendar;
-
 import javax.annotation.Resource;
 
 import org.springframework.boot.CommandLineRunner;
@@ -25,7 +23,6 @@ public class AppBootstrap implements CommandLineRunner
 
 		user.setName( "Fernando" );
 		user.setAge( 39 );
-		user.setCreationDate( new java.sql.Date(Calendar.getInstance().getTime().getTime()) );
 
 		userRepository.save(user);
 	}

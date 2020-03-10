@@ -1,6 +1,6 @@
 package com.demo.entities;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,15 +16,21 @@ public class LocalUser
 
 	@Id
 	@GeneratedValue
-	Long resourceId;
+	Long id;
 
 	@NotBlank
 	String name;
 
 	Integer age;
 
-	Date creationDate;
+	Timestamp creationDate;
 
 	String status;
 
+	public LocalUser()
+	{
+		if( creationDate == null ) {
+			creationDate = new Timestamp(System.currentTimeMillis());
+		}
+	}
 }

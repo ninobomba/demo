@@ -10,13 +10,16 @@ $(document).ready(function () {
         update();
     });
 
-    $('#ui_button_delete').click(function () {
-        var id = $('#ui_input_user_id').val();
+    $('#ui_button_user_delete').click(function () {
+        var id = $('#ui_input_delete_user_id').val();
         if( id ) {
             delete_user(id);
         }
     });
 
+    
+    list();
+    
 });
 
 
@@ -34,6 +37,8 @@ function save()
         data: JSON.stringify( parameters ),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
+        crossDomain: true,
+        crossOrigin: true,
         success: function(data, textStatus, xhr){
         },
         complete: function(xhr, textStatus) {
@@ -41,36 +46,9 @@ function save()
             if( xhr.status == 201 ){
                 alert( 'user has been saved' );
             }
+            list();
         },
         error: function(err) {
-        }
-    });
-}
-
-function edit(id)
-{
-
-    $('#ui_input_update_user_id').val('');
-    $('#ui_input_update_user_name').val('');
-    $('#ui_input_update_user_age').val('');
-    $('#ui_input_update_user_status').val('');
-    
-    $.ajax({
-        type: "GET",
-        url: url + '/user/' + id,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function(data, textStatus, xhr){
-            $('#ui_input_update_user_id').val(data.id);
-            $('#ui_input_update_user_name').val(data.name);
-            $('#ui_input_update_user_age').val(date.age);
-            $('#ui_input_update_user_status').val(data.status);
-        },
-        complete: function(xhr, textStatus) {
-            console.log('request is complete', xhr.status);
-        },
-        error: function(err) {
-            alert('an error has ocurred');
         }
     });
 }
@@ -84,25 +62,27 @@ function list()
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function(data, textStatus, xhr){
-
+        	
+        	var users = data._embedded.localUsers;
+        	
             var table = 'No Data';
-            var thead = '<thead><tr><th scope="col">#</th><th scope="col">Name<th>Age</th><th scope="col">Date</th><th>View</th></tr></thead>';
+            var thead = '<thead><tr><th scope="col">#</th><th scope="col">Name<th>Age</th><th scope="col">Date</th></tr></thead>';
             var rows = '';
 
             if( xhr.status == 200 )
             {
-                for( var index =0; index < data.length; index++ )
+                for( var index =0; index < users.length; index++ )
                 {
-                    var user = data[ index ];
-                    rows += '<tr><td scope="row">'+ ( index + 1 ) + '</td><td>' + user.name + '</td><td>' + user.age + '</td><td>'+ user.creationDate +'</td><td><a href="#" class="btn btn-primary stretched-link" onClick="user_edit(' + user.id + ')">View</a></td></tr>'
+                    var user = users[ index ];
+                    rows += '<tr><td scope="row">'+ ( index + 1 ) + '</td><td>' + user.name + '</td><td>' + user.age + '</td><td>'+ user.creationDate +'</td></tr>'
                 }
 
-                if( data && data.length > 0 ){
+                if( users && users.length > 0 ){
                     table = '<table class="table table-striped table-hover">' + thead + '<tbody>' + rows + '</tbody></table>';
                 }
             }
 
-            $('#ui_table_user_list').html( table );
+            $('#ui_table_user_list').empty().html( table );
         },
         complete: function(xhr, textStatus) {
             console.log('request is complete', xhr.status);
@@ -119,6 +99,7 @@ function update()
     var id = $('#ui_input_update_user_id').val();
 
     var parameters = {
+    		'id'     : $('#ui_input_update_user_id').val(),
             'name'   : $('#ui_input_update_user_name').val(),
             'age'    : $('#ui_input_update_user_age').val(),
             'status' : $('#ui_input_update_user_status').val()
@@ -137,8 +118,7 @@ function update()
             console.log('request is complete', xhr.status);
             if( xhr.status == 200 ){
                 alert( 'user has been updated' );
-                $('#ui_dialog_user_edit').modal('hide');
-                user_list();
+                list();
             }
         },
         error: function(err) {
@@ -146,7 +126,24 @@ function update()
     });
 }
 
-function delete_user()
+function delete_user(id)
 {
-	
+	 $.ajax({
+	        type: "DELETE",
+	        url: url + '/user/' + id,
+	        contentType: "application/json; charset=utf-8",
+	        dataType: "json",
+	        success: function(data, textStatus, xhr){
+	        },
+	        complete: function(xhr, textStatus) {
+	            console.log('request is complete', xhr.status);
+	            if( xhr.status == 200 || xhr.status == 204 ){
+	                alert('user has been deleted');
+	                list();
+	            }
+	        },
+	        error: function(err) {
+	            //alert('an error has ocurred');
+	        }
+	    });
 }
