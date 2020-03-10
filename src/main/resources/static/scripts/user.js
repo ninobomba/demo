@@ -3,7 +3,6 @@ var url = 'http://127.0.0.1:8080'
 $(document).ready(function () {
 
     $('#ui_button_user_save').click(function () {
-    	console.log('save');
         save();
     });
 
@@ -47,8 +46,6 @@ function save()
         }
     });
 }
-
-
 
 function edit(id)
 {

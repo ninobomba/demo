@@ -10,9 +10,6 @@ import org.springframework.context.annotation.Configuration;
 import com.demo.entities.LocalUser;
 import com.demo.repositories.LocalUserRepository;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @Configuration
 public class AppBootstrap implements CommandLineRunner
 {
@@ -23,7 +20,6 @@ public class AppBootstrap implements CommandLineRunner
 	@Override
 	public void run(String... args) throws Exception
 	{
-		log.debug( "Application has started" );
 
 		final LocalUser user = new LocalUser();
 

@@ -16,7 +16,7 @@ public class LocalUser
 
 	@Id
 	@GeneratedValue
-	Long id;
+	Long resourceId;
 
 	@NotBlank
 	String name;
