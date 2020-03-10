@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+	<!-- js -->
+	<script src="plugins/jquery.min.js"></script>
+	<script src="plugins/jquery-ui.min.js"></script>
+	<script src="plugins/tether.min.js"></script>
+	<script src="plugins/bootstrap.min.js"></script>
+
+	<script src="scripts/user.js"></script>
+
+	<!-- styles -->
+	<link rel="stylesheet" type="text/css" href="plugins/jquery-ui.min.css" />
+	<link rel="stylesheet" type="text/css" href="plugins/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="plugins/font-awesome.min.css" />
+
+	<title>.:: User ::.</title>
+
+</head>
+
+	<body>
+	
+	<ul class="nav nav-pills mb-3" id="pills-tab-main" role="tablist">
+		<li class="nav-item"><a class="nav-link active" id="pills-create-tab" data-toggle="pill" href="#pills-create" role="tab" aria-selected="true">Create</a></li>
+		<li class="nav-item"><a class="nav-link"        id="pills-update-tab" data-toggle="pill" href="#pills-update" role="tab" aria-selected="false">Update</a></li>
+	</ul>
+	<div class="tab-content" id="pills-tabContent">
+		<div class="tab-pane fade show active" id="pills-create" role="tabpanel" aria-labelledby="pills-create-tab">
+			<div class="card border-light mb-3" style="max-width: 30rem;">
+				<div class="card-header">Create</div>
+				<div class="card-body">
+					<table class="table">
+						<tr>
+							<td><label for="ui_input_user_name">Full Name: </label></td>
+							<td><input type="text" id="ui_input_create_user_name" class="form-control"></td>
+						</tr>
+						<tr>
+							<td><label for="ui_input_user_age">Age: </label></td>
+							<td><input type="number" id="ui_input_create_user_age" class="form-control"></td>
+						</tr>
+						<tr>
+							<td><label for="ui_input_user_status">Status: </label></td>
+							<td><input type="text" id="ui_input_create_user_status" class="form-control"></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><button type="button" class="btn btn-primary" id="ui_button_user_save">Save</button></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="tab-pane fade" id="pills-update" role="tabpanel" aria-labelledby="pills-update-tab">
+			<div class="card border-light mb-3" style="max-width: 30rem;">
+				<div class="card-header">Update</div>
+				<div class="card-body">
+					<form id="ui_form_update">
+						<input type="hidden" id="ui_input_user_id">
+						<table class="table">
+							<tr>
+								<td><label for="ui_input_user_name">Full Name: </label></td>
+								<td><input type="text" id="ui_input_update_user_name" class="form-control"></td>
+							</tr>
+							<tr>
+								<td><label for="ui_input_user_age">Age: </label></td>
+								<td><input type="number" id="ui_input_update_user_age" class="form-control"></td>
+							</tr>
+							<tr>
+								<td><label for="ui_input_user_status">Status: </label></td>
+								<td><input type="text" id="ui_input_update_user_status" class="form-control"></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td><button type="button" class="btn btn-primary" id="ui_button_user_update">Save</button></td>
+							</tr>
+						</table>
+					</form>
+				</div>
+			</div>
+			
+		</div>
+			
+	</div>
+	</body>
+</html>
