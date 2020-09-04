@@ -14,7 +14,8 @@ Conexion con mysql
 
 Hibernate configurado con create-drop
 
-
 Cors habilitado
+
+Bootstrap , Jquery
 
 Por agregar JWT
